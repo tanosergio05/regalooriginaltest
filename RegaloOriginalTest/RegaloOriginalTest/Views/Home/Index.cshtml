@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="jumbotron">
+    <h2>Ingrese una persona y su pedido</h2>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.Label("Nombre: ")
+        <input id="txtNombre" name="txtNombre" , class="input-sm form-control" />
+        <br />
+    </div>
+    <div class="col-md-8">
+        @Html.Label("Item: ")
+        <input id="txtItem" name="txtItem" , class="input-sm form-control" />
+        <p><a class="btn btn-default" id="btnAgregarItem" href="">Agregar Item</a></p>
+    </div>
+    <div class="col-md-8">
+        <span id="spanMensajes"></span>
+    </div>
+
+    <div class="col-md-8">
+        <p><a href="" id="btnAgregarPedido" class="btn btn-primary btn-lg">Agregar Pedido</a></p>
+    </div>
+    <br />
+    <div class="col-md-8">
+        @Html.ActionLink("Ver Totales!", "ListarPedidos")
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#btnAgregarItem").click(function () {
+                var url = "@Url.Action("AgregarItem", "Home")";
+                var item = $("#txtItem").val();
+                var data = { item: item };
+
+                $.post(url, data).done(function (data) {
+                    $("#spanMensajes").html(data);
+                }).fail().always(function () {
+                    console.log(err.responseText);
+                });
+            });
+
+            $("#btnAgregarPedido").click(function () {
+                var url = "@Url.Action("AgregarPedido", "Home")";
+                var nombre = $("#txtNombre").val();
+                var data = { nombre: nombre };
+
+                $.post(url, data).done(function (data) {
+                    $("#spanMensajes").html();
+                }).fail().always(function () {
+                    console.log(erro.responseText);
+                });
+            });
+        });
+
+    </script>
+}
+

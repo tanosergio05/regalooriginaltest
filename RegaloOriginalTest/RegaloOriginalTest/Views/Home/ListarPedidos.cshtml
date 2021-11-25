@@ -1,0 +1,26 @@
+﻿@model RegaloOriginalTest.Models.PedidoViewModel
+@{
+    ViewBag.Title = "ListarPedidos";
+}
+
+<h4>Lista de Pedidos y cantidades</h4>
+<br />
+<ol>
+    @{
+        foreach (var nombre in Model.Pedidos.Keys)
+        {
+            <li>
+                @nombre - @Model.Pedidos[nombre]
+            </li>
+        }
+    }
+</ol>
+
+<br />
+<h4>Persona que mas gastó:</h4>
+@Model.NombrePersonaQueMasGasto
+
+<br />
+<h4>Total de los pedidos:</h4>
+@Model.TotalTodosLosPedidos.ToString()
+<br />
